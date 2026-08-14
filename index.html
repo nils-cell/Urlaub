@@ -300,21 +300,35 @@ function openStats(){
  if(!games){document.getElementById('stats-content').innerHTML='<div class="empty">Noch keine abgeschlossenen Spiele.</div>'}
  else{
   const map={};
-  history.forEach(m=>m.players.forEach(p=>{if(!map[p.name])map[p.name]={games:0,wins:0,points:0,best:-Infinity};map[p.name].games++;map[p.name].points+=p.score;map[p.name].best=Math.max(map[p.name].best,p.score)}));
+  history.forEach(m=>{
+   const sorted=[...m.players].sort((a,b)=>b.score-a.score);
+   m.players.forEach(p=>{
+    if(!map[p.name])map[p.name]={games:0,wins:0,points:0,best:-Infinity,worst:Infinity,matches:[]};
+    const s=map[p.name],rank=sorted.indexOf(p)+1;
+    s.games++;s.points+=p.score;s.best=Math.max(s.best,p.score);s.worst=Math.min(s.worst,p.score);
+    if(rank===1)s.wins++;
+    s.matches.push({date:m.date,score:p.score,rounds:p.rounds,rank,total:m.players.length});
+   });
+  });
   const rows=Object.entries(map).sort((a,b)=>b[1].wins-a[1].wins||b[1].points-a[1].points);
-  history.forEach(m=>{const w=[...m.players].sort((a,b)=>b.score-a.score)[0];if(map[w.name])map[w.name].wins++});
-  rows.sort((a,b)=>b[1].wins-a[1].wins||b[1].points-a[1].points);
-  document.getElementById('stats-content').innerHTML=`<div class="stats-grid"><div class="stat"><small>Partien</small><strong>${games}</strong></div><div class="stat"><small>Beste Punktzahl</small><strong>${Math.max(...history.flatMap(m=>m.players.map(p=>p.score)))}</strong></div><div class="stat"><small>Meister</small><strong>${esc(rows[0]?.[0]||'–')}</strong></div></div>${rows.map(([n,x])=>`<div class="rank-row"><span>🐷</span><span><b>${esc(n)}</b><br><small style="color:var(--muted)">${x.games} Spiele · Ø ${(x.points/x.games).toFixed(1)} · Bestwert ${x.best}</small></span><span class="rank-pts">🏆 ${x.wins}</span></div>`).join('')}`
+  document.getElementById('stats-content').innerHTML=`<div class="stats-grid"><div class="stat"><small>Partien</small><strong>${games}</strong></div><div class="stat"><small>Beste Punktzahl</small><strong>${Math.max(...history.flatMap(m=>m.players.map(p=>p.score)))}</strong></div><div class="stat"><small>Meister</small><strong>${esc(rows[0]?.[0]||'–')}</strong></div></div>${rows.map(([n,x],i)=>`<div class="match-card" id="pstat-${i}">
+   <div class="match-header" onclick="togglePlayerStat(${i})">
+    <div>🐷 <b>${esc(n)}</b><div style="color:var(--muted);font-size:12px;margin-top:3px">${x.games} Spiele · Ø ${(x.points/x.games).toFixed(1)} · Beste ${x.best} · Schlechteste ${x.worst}</div></div>
+    <span class="rank-pts">🏆 ${x.wins} <span style="color:var(--muted);font-size:12px">▾</span></span>
+   </div>
+   <div class="match-body">${x.matches.map(mm=>`<div class="rank-row"><span>${mm.rank===1?'🥇':mm.rank===2?'🥈':mm.rank===3?'🥉':mm.rank+'.'}</span><span>${esc(mm.date)}</span><span style="color:var(--muted)">${mm.rounds} Rd. · Platz ${mm.rank}/${mm.total}</span><span class="rank-pts">${mm.score}</span></div>`).join('')}</div>
+  </div>`).join('')}`
  }
  document.getElementById('stats-overlay').classList.add('show')
 }
+function togglePlayerStat(i){document.getElementById('pstat-'+i)?.classList.toggle('open')}
 function exportCSV(){
- const rows=state.players.map(p=>`"${p.name.replace(/"/g,'""')}",${p.score},${p.rounds}`).join('\\n');
- download('schweinerei.csv','\\uFEFFName,Punkte,Runden\\n'+rows,'text/csv;charset=utf-8')
+ const rows=state.players.map(p=>`"${p.name.replace(/"/g,'""')}",${p.score},${p.rounds}`).join('\n');
+ download('schweinerei.csv','\uFEFFName,Punkte,Runden\n'+rows,'text/csv;charset=utf-8')
 }
 function exportHistory(){
- const rows=history.flatMap((m,i)=>m.players.map(p=>`${history.length-i},"${p.name.replace(/"/g,'""')}",${p.score},${p.rounds},"${m.date}"`)).join('\\n');
- download('schweinerei_verlauf.csv','\\uFEFFSpiel,Name,Punkte,Runden,Datum\\n'+rows,'text/csv;charset=utf-8')
+ const rows=history.flatMap((m,i)=>m.players.map(p=>`${history.length-i},"${p.name.replace(/"/g,'""')}",${p.score},${p.rounds},"${m.date}"`)).join('\n');
+ download('schweinerei_verlauf.csv','\uFEFFSpiel,Name,Punkte,Runden,Datum\n'+rows,'text/csv;charset=utf-8')
 }
 function download(name,data,type){const a=document.createElement('a');const u=URL.createObjectURL(new Blob([data],{type}));a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000);toast('📄 Export erstellt')}
 function flash(el){el.classList.remove('flash');void el.offsetWidth;el.classList.add('flash')}
