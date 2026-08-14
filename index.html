@@ -321,7 +321,7 @@ function renderCombos() {
     return `<button class="combo-btn ${c.cls}" onclick="applyCombo(${i},this)">
       <span class="combo-icon">${c.icon}</span>
       <span class="combo-name">${c.name}</span>
-      ${c.desc?<span style="font-size:11px;color:var(--text-muted)">${c.desc}</span>:''}
+      ${c.desc?`<span style="font-size:11px;color:var(--text-muted)">${c.desc}</span>`:''}
       <span class="combo-pts ${pc}">${pl}</span>
     </button>`;
   }).join('');
@@ -406,10 +406,10 @@ function applyCombo(idx, btn) {
   if (!p) return;
   btn.classList.remove('flash'); void btn.offsetWidth; btn.classList.add('flash');
   if (combo.pts===null) {
-    p.score=0; showToast(💀 ${p.name}: Schwein auf Schwein! → 0);
+    p.score=0; showToast(`💀 ${p.name}: Schwein auf Schwein! → 0`);
   } else {
     p.score+=combo.pts;
-    showToast(${combo.icon} ${p.name}: ${combo.pts>0?'+':''}${combo.pts} → ${p.score});
+    showToast(`${combo.icon} ${p.name}: ${combo.pts>0?'+':''}${combo.pts} → ${p.score}`);
   }
   saveState(); render();
 }
@@ -425,12 +425,12 @@ function nextPlayer() {
   let next=(state.currentPlayerIdx+1)%state.players.length, tries=0;
   while(state.players[next].rounds>=MAX_ROUNDS&&tries<state.players.length){next=(next+1)%state.players.length;tries++;}
   state.currentPlayerIdx=next; saveState(); render();
-  showToast(➡️ Jetzt: ${state.players[next].name});
+  showToast(`➡️ Jetzt: ${state.players[next].name}`);
 }
 
 function addPlayer() {
   if(state.players.length>=MAX_PLAYERS) return;
-  state.players.push({name:Spieler ${state.players.length+1},score:0,rounds:0});
+  state.players.push({name:`Spieler ${state.players.length+1}`,score:0,rounds:0});
   saveState(); render();
 }
 function removePlayer(idx) {
@@ -466,7 +466,7 @@ function saveMatchToHistory() {
 function renderHistory() {
   const list = document.getElementById('history-list');
   if(!matchHistory.length){
-    list.innerHTML=<div class="history-empty"><span class="h-icon">📋</span>Noch keine Spiele beendet.<br>Spiel eine Runde um den Verlauf zu sehen!</div>;
+    list.innerHTML=`<div class="history-empty"><span class="h-icon">📋</span>Noch keine Spiele beendet.<br>Spiel eine Runde um den Verlauf zu sehen!</div>`;
     return;
   }
   list.innerHTML = matchHistory.map((m,i)=>{
@@ -519,7 +519,7 @@ function renderKnownPlayers() {
   const c = document.getElementById('known-chips');
   const names = Object.entries(knownPlayers).sort((a,b)=>b[1]-a[1]);
   if(!names.length){
-    c.innerHTML=<span style="color:var(--text-muted);font-size:13px;line-height:1.6">Noch keine gespeicherten Spieler.<br>Namen werden automatisch gespeichert wenn ein Spiel endet.</span>;
+    c.innerHTML=`<span style="color:var(--text-muted);font-size:13px;line-height:1.6">Noch keine gespeicherten Spieler.<br>Namen werden automatisch gespeichert wenn ein Spiel endet.</span>`;
     return;
   }
   c.innerHTML = names.map(([name,cnt])=>`
@@ -534,15 +534,15 @@ function renderKnownPlayers() {
 
 function addKnownToGame(name) {
   if(state.players.length>=MAX_PLAYERS){showToast('Maximal 8 Spieler!');return;}
-  if(state.players.some(p=>p.name===name)){showToast(${name} ist bereits dabei!);return;}
+  if(state.players.some(p=>p.name===name)){showToast(`${name} ist bereits dabei!`);return;}
   state.players.push({name,score:0,rounds:0});
   saveState(); render();
   switchTab('game',document.querySelectorAll('.tab-btn')[0]);
-  showToast(✅ ${name} hinzugefügt!);
+  showToast(`✅ ${name} hinzugefügt!`);
 }
 function removeKnown(name) {
   delete knownPlayers[name]; saveKnown(); renderKnownPlayers();
-  showToast(${name} vergessen);
+  showToast(`${name} vergessen`);
 }
 
 // ── WINNER ────────────────────────────────────
@@ -566,7 +566,7 @@ function launchConfetti() {
   for(let i=0;i<60;i++){
     const el=document.createElement('div');
     el.className='confetti-piece';
-    el.style.cssText=left:${Math.random()*100}vw;background:${cols[Math.floor(Math.random()*cols.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*.8}s;;
+    el.style.cssText=`left:${Math.random()*100}vw;background:${cols[Math.floor(Math.random()*cols.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-duration:${1.5+Math.random()*2}s;animation-delay:${Math.random()*.8}s;`;
     document.body.appendChild(el);
     setTimeout(()=>el.remove(),4000);
   }
@@ -574,7 +574,7 @@ function launchConfetti() {
 
 // ── CSV ───────────────────────────────────────
 function exportCSV() {
-  const rows=state.players.map(p=>"${p.name.replace(/"/g,'""')}",${p.score},${p.rounds}).join('\n');
+  const rows=state.players.map(p=>`"${p.name.replace(/"/g,'""')}",${p.score},${p.rounds}`).join('\n');
   const blob=new Blob(['\uFEFFName,Punkte,Runden\n'+rows],{type:'text/csv;charset=utf-8;'});
   const url=URL.createObjectURL(blob);
   const a=document.createElement('a'); a.href=url; a.download='schweinerei.csv'; a.click();
