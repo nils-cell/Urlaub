@@ -128,13 +128,26 @@ header{display:flex;align-items:center;justify-content:space-between;gap:16px;ma
 </style>
 </head>
 <body>
-<div class="app">
+<div class="overlay" id="login-overlay" style="z-index:200">
+ <div class="modal" style="max-width:380px;text-align:center">
+  <div style="font-size:50px;margin-bottom:6px">🐷</div>
+  <h2>Anmelden</h2>
+  <div class="modal-sub">Bitte melde dich an, um Schweinerei zu nutzen.</div>
+  <div class="field" style="text-align:left"><label>Nutzername</label><input type="text" id="login-user" autocomplete="username"></div>
+  <div class="field" style="text-align:left"><label>Passwort</label><input type="password" id="login-pass" autocomplete="current-password" onkeydown="if(event.key==='Enter')tryLogin()"></div>
+  <div id="login-error" style="color:var(--red);font-size:12px;margin-bottom:10px;display:none">❌ Nutzername oder Passwort falsch.</div>
+  <button class="btn btn-accent btn-lg" style="width:100%" onclick="tryLogin()">🔓 Anmelden</button>
+ </div>
+</div>
+
+<div class="app" id="app-root">
 <header>
  <div class="logo"><span class="emoji">🐷</span><h1>Schweinerei</h1></div>
  <div class="header-actions">
   <button class="btn btn-sm" onclick="exportCSV()">📄 CSV</button>
   <button class="btn btn-sm" onclick="openStats()">📊 Statistik</button>
   <button class="btn btn-sm" onclick="openSettings()">⚙️ Einstellungen</button>
+  <button class="btn btn-sm" onclick="logout()">🔒 Abmelden</button>
   <button class="btn btn-danger btn-sm" onclick="confirmReset()">↺ Neues Spiel</button>
  </div>
 </header>
@@ -862,6 +875,26 @@ function flash(el){el.classList.remove('flash');void el.offsetWidth;el.classList
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),2400)}
 function confetti(){for(let i=0;i<75;i++){const e=document.createElement('div');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.7+'s';e.style.background=['#e85d2f','#f0a500','#4caf72','#5b9cf6','#ff6b9d','#a78bfa'][Math.floor(Math.random()*6)];document.body.appendChild(e);setTimeout(()=>e.remove(),3200)}}
 
+const AUTH_USER='Nils',AUTH_PASS='nekmys-3Kyhsa-hujfaf';
+function checkAuth(){
+ const authed=localStorage.getItem('sw_authed')==='1';
+ document.getElementById('login-overlay').classList.toggle('show',!authed);
+ document.getElementById('app-root').style.display=authed?'':'none'
+}
+function tryLogin(){
+ const u=document.getElementById('login-user').value.trim();
+ const p=document.getElementById('login-pass').value;
+ if(u===AUTH_USER&&p===AUTH_PASS){
+  localStorage.setItem('sw_authed','1');
+  document.getElementById('login-error').style.display='none';
+  document.getElementById('login-overlay').classList.remove('show');
+  document.getElementById('app-root').style.display=''
+ } else {
+  document.getElementById('login-error').style.display='block'
+ }
+}
+function logout(){localStorage.removeItem('sw_authed');location.reload()}
+
 if('serviceWorker' in navigator){
  try{
   const swCode="self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>self.clients.claim());self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))});";
@@ -869,6 +902,7 @@ if('serviceWorker' in navigator){
   navigator.serviceWorker.register(swUrl).catch(()=>{});
  }catch(e){}
 }
+checkAuth();
 loadSettings();applyTheme();loadCombos();loadComboStats();loadAchievements();load();renderCombos();render();renderSetupNames();startTimer();
 </script>
 </body>
