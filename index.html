@@ -5,6 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🐷 Schweinerei Pro</title>
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#0e1118">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Schweinerei">
+<link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgcng9IjQwIiBmaWxsPSIjZmY2YjM1Ii8+PHRleHQgeD0iMTAwIiB5PSIxNDIiIGZvbnQtc2l6ZT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5C3PC90ZXh0Pjwvc3ZnPg==">
+<link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMjAwIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgcng9IjQwIiBmaWxsPSIjZmY2YjM1Ii8+PHRleHQgeD0iMTAwIiB5PSIxNDIiIGZvbnQtc2l6ZT0iMTMwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj7wn5C3PC90ZXh0Pjwvc3ZnPg==">
+<link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlNjaHdlaW5lcmVpIFBybyIsICJzaG9ydF9uYW1lIjogIlNjaHdlaW5lcmVpIiwgImRlc2NyaXB0aW9uIjogIlB1bmt0ZS1UcmFja2VyIGbDvHIgU2Nod2VpbmNoZW4gd8O8cmZlbG4iLCAic3RhcnRfdXJsIjogIi4iLCAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwgImJhY2tncm91bmRfY29sb3IiOiAiIzBlMTExOCIsICJ0aGVtZV9jb2xvciI6ICIjMGUxMTE4IiwgImljb25zIjogW3sic3JjIjogImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owaWFIUjBjRG92TDNkM2R5NTNNeTV2Y21jdk1qQXdNQzl6ZG1jaUlIWnBaWGRDYjNnOUlqQWdNQ0F5TURBZ01qQXdJajQ4Y21WamRDQjNhV1IwYUQwaU1qQXdJaUJvWldsbmFIUTlJakl3TUNJZ2NuZzlJalF3SWlCbWFXeHNQU0lqWm1ZMllqTTFJaTgrUEhSbGVIUWdlRDBpTVRBd0lpQjVQU0l4TkRJaUlHWnZiblF0YzJsNlpUMGlNVE13SWlCMFpYaDBMV0Z1WTJodmNqMGliV2xrWkd4bElqN3duNUMzUEM5MFpYaDBQand2YzNablBnPT0iLCAic2l6ZXMiOiAiMTkyeDE5MiIsICJ0eXBlIjogImltYWdlL3N2Zyt4bWwifSwgeyJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpSUhacFpYZENiM2c5SWpBZ01DQXlNREFnTWpBd0lqNDhjbVZqZENCM2FXUjBhRDBpTWpBd0lpQm9aV2xuYUhROUlqSXdNQ0lnY25nOUlqUXdJaUJtYVd4c1BTSWpabVkyWWpNMUlpOCtQSFJsZUhRZ2VEMGlNVEF3SWlCNVBTSXhORElpSUdadmJuUXRjMmw2WlQwaU1UTXdJaUIwWlhoMExXRnVZMmh2Y2owaWJXbGtaR3hsSWo3d241QzNQQzkwWlhoMFBqd3ZjM1puUGc9PSIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCJ9XX0=">
 <style>
 :root{
   --bg:#090b10;--bg2:#0e1118;--surface:#141923;--surface2:#1b2230;--surface3:#232c3b;
@@ -151,6 +158,8 @@ header{display:flex;align-items:center;justify-content:space-between;gap:16px;ma
  <div class="action-row"><button class="btn btn-accent btn-lg" onclick="nextPlayer()">➡️ Nächster Spieler</button></div>
  <div class="section-title" style="margin-top:22px">Punktestand</div>
  <div class="scoreboard"><div class="score-head"><div>Spieler</div><div>Punkte</div><div>Runden</div><div>Fortschritt</div><div></div></div><div id="player-list"></div><div class="add-player-row"><button class="btn btn-sm" onclick="addPlayer()" id="add-player-btn">＋ Spieler hinzufügen</button></div></div>
+ <div class="section-title" style="margin-top:22px">🔮 Wer kann noch gewinnen?</div>
+ <div class="chart-wrap" id="forecast-panel" style="padding:14px 16px"></div>
  <div class="section-title" style="margin-top:22px">📈 Punkteverlauf</div>
  <div class="chart-wrap" id="game-chart"></div>
 </section>
@@ -202,6 +211,12 @@ header{display:flex;align-items:center;justify-content:space-between;gap:16px;ma
    <button class="btn btn-sm" onclick="saveComboEdits()">💾 Speichern</button>
    <button class="btn btn-sm btn-danger" onclick="resetCombos()">↺ Standard wiederherstellen</button>
   </div>
+  <div class="section-title" style="margin-top:18px">Preset speichern / laden</div>
+  <div class="setup-grid" style="margin-bottom:6px">
+   <input type="text" id="preset-name" placeholder="Name z. B. Turnierregeln" maxlength="24">
+   <button class="btn btn-sm" onclick="saveComboPreset()">💾 Als Preset speichern</button>
+  </div>
+  <div id="preset-list" class="known-chips" style="margin-bottom:22px"></div>
   <div class="section-title">Zug-Timer</div>
   <div class="field"><label class="checkbox-field"><input type="checkbox" id="settings-timer-enabled" onchange="toggleTimerSetting(this)">Timer pro Zug aktivieren</label></div>
   <div class="field">
@@ -210,6 +225,7 @@ header{display:flex;align-items:center;justify-content:space-between;gap:16px;ma
     <option value="15">15 Sekunden</option><option value="30">30 Sekunden</option><option value="45">45 Sekunden</option><option value="60">60 Sekunden</option>
    </select>
   </div>
+  <div class="field"><label class="checkbox-field"><input type="checkbox" id="settings-speech" onchange="toggleSpeechSetting(this)">🔊 „Wer ist dran“ ansagen (Sprachausgabe)</label></div>
   <div class="section-title" style="margin-top:18px">Darstellung</div>
   <div class="field"><label class="checkbox-field"><input type="checkbox" id="settings-theme" onchange="toggleTheme()">☀️ Helles Design</label></div>
   <div class="modal-actions" style="justify-content:flex-end;margin-top:10px"><button class="btn btn-accent" onclick="closeOverlay('settings-overlay')">Fertig</button></div>
@@ -239,7 +255,18 @@ let COMBOS=JSON.parse(JSON.stringify(DEFAULT_COMBOS));
 const MAX_PLAYERS=8;
 let state={players:[],currentPlayerIdx:0,gameOver:false,maxRounds:10,lastAction:null,teamsMode:false,tournament:null};
 let history=[],known={},comboStats={};
-let settings={timerEnabled:false,timerSeconds:30,theme:'dark'};
+let settings={timerEnabled:false,timerSeconds:30,theme:'dark',speechEnabled:false};
+let achievements={};
+const ACHIEVEMENTS=[
+ {id:'first_top_combo',icon:'🌟',name:'Volltreffer',desc:'Die wertvollste Kombination geworfen',check:(p,ctx)=>ctx.maxComboPts>0&&p.history.some(h=>h.delta===ctx.maxComboPts)},
+ {id:'hot5',icon:'🔥',name:'Lauf der Serie',desc:'5 positive Würfe in Folge in einer Partie',check:(p)=>longestRun(p.history,h=>h.delta>0)>=5},
+ {id:'cold5',icon:'❄️',name:'Pechsträhne',desc:'5 Nieten in Folge in einer Partie',check:(p)=>longestRun(p.history,h=>h.delta<=0)>=5},
+ {id:'comeback',icon:'💪',name:'Comeback-König',desc:'Trotz negativem Punktestand die Partie gewonnen',check:(p,ctx)=>ctx.isWinner&&p.history.some(h=>h.scoreAfter<0)&&p.score>=0},
+ {id:'selfdestruct3',icon:'💀',name:'Selbstzerstörung',desc:'3× die Reset-Kombination in einer Partie geworfen',check:(p,ctx)=>ctx.specialName&&p.history.filter(h=>h.comboName===ctx.specialName).length>=3},
+ {id:'winstreak5',icon:'🏆',name:'Unaufhaltsam',desc:'5 Siege in Folge über mehrere Partien',check:(p,ctx)=>ctx.winStreak>=5},
+ {id:'games10',icon:'🐷',name:'Stammgast',desc:'10 Partien mitgespielt',check:(p,ctx)=>ctx.gamesPlayed>=10},
+ {id:'tournament_win',icon:'👑',name:'Turniersieger',desc:'Ein Turnier gewonnen',check:()=>false}
+];
 let undoStack=[];
 let timerInterval=null,timerRemaining=0;
 
@@ -263,6 +290,55 @@ function loadCombos(){
 function saveCombos(){localStorage.setItem('sw_combos',JSON.stringify(COMBOS))}
 function loadComboStats(){try{comboStats=JSON.parse(localStorage.getItem('sw_combostats'))||{}}catch{}}
 function saveComboStats(){localStorage.setItem('sw_combostats',JSON.stringify(comboStats))}
+function loadAchievements(){try{achievements=JSON.parse(localStorage.getItem('sw_achievements'))||{}}catch{}}
+function saveAchievements(){localStorage.setItem('sw_achievements',JSON.stringify(achievements))}
+function longestRun(arr,pred){let best=0,cur=0;(arr||[]).forEach(x=>{if(pred(x)){cur++;best=Math.max(best,cur)}else cur=0});return best}
+function matchWinnerNames(m){
+ if(m.teamsMode){
+  const teams={};m.players.forEach(p=>{(teams[p.team]=teams[p.team]||[]).push(p)});
+  const totals=Object.entries(teams).map(([team,members])=>({members,total:members.reduce((s,x)=>s+x.score,0)}));
+  const top=Math.max(...totals.map(t=>t.total));
+  const winners=new Set();
+  totals.filter(t=>t.total===top).forEach(t=>t.members.forEach(m2=>winners.add(m2.name)));
+  return winners
+ }
+ const top=Math.max(...m.players.map(p=>p.score));
+ return new Set(m.players.filter(p=>p.score===top).map(p=>p.name))
+}
+function currentWinStreak(name){
+ let streak=0;
+ for(const m of history){if(matchWinnerNames(m).has(name))streak++;else break}
+ return streak
+}
+function checkAchievements(){
+ const maxComboPts=Math.max(0,...COMBOS.filter(c=>c.pts!==null).map(c=>c.pts));
+ const special=COMBOS.find(c=>c.pts===null),specialName=special?special.name:null;
+ let winnerNames;
+ if(state.teamsMode){
+  const teams={};state.players.forEach(p=>{(teams[p.team]=teams[p.team]||[]).push(p)});
+  const totals=Object.entries(teams).map(([team,members])=>({members,total:members.reduce((s,x)=>s+x.score,0)}));
+  const top=Math.max(...totals.map(t=>t.total));
+  winnerNames=new Set();
+  totals.filter(t=>t.total===top).forEach(t=>t.members.forEach(m=>winnerNames.add(m.name)))
+ } else {
+  const top=Math.max(...state.players.map(p=>p.score));
+  winnerNames=new Set(state.players.filter(p=>p.score===top).map(p=>p.name))
+ }
+ const unlocked=[];
+ state.players.forEach(p=>{
+  const ctx={maxComboPts,specialName,isWinner:winnerNames.has(p.name),winStreak:currentWinStreak(p.name),gamesPlayed:history.filter(m=>m.players.some(x=>x.name===p.name)).length};
+  if(!achievements[p.name])achievements[p.name]=[];
+  ACHIEVEMENTS.forEach(a=>{
+   if(a.id==='tournament_win')return;
+   if(achievements[p.name].includes(a.id))return;
+   if(a.check(p,ctx)){achievements[p.name].push(a.id);unlocked.push({player:p.name,badge:a})}
+  })
+ });
+ if(unlocked.length){
+  saveAchievements();
+  toast(unlocked.length===1?('🎖️ '+unlocked[0].player+' schaltet frei: '+unlocked[0].badge.icon+' '+unlocked[0].badge.name):('🎖️ '+unlocked.length+' neue Erfolge freigeschaltet!'))
+ }
+}
 function save(){localStorage.setItem('sw_state',JSON.stringify(state))}
 function saveHistory(){localStorage.setItem('sw_history',JSON.stringify(history))}
 function saveKnown(){localStorage.setItem('sw_known',JSON.stringify(known))}
@@ -333,7 +409,7 @@ function render(){
   list.innerHTML=state.players.map((pl,i)=>playerRowHTML(i)).join('')
  }
  document.getElementById('add-player-btn').style.display=(state.players.length>=MAX_PLAYERS||state.teamsMode)?'none':'inline-flex';
- renderKnown();renderGlobalStats();renderGameChart();renderTournamentBar();save()
+ renderKnown();renderGlobalStats();renderGameChart();renderTournamentBar();renderForecast();save()
 }
 function renamePlayer(i,name){state.players[i].name=name.trim()||'Spieler '+(i+1);save();render()}
 function snapshot(){return JSON.parse(JSON.stringify(state))}
@@ -370,7 +446,7 @@ function nextPlayer(){
  let next=(state.currentPlayerIdx+1)%state.players.length,tries=0;
  while(state.players[next].rounds>=state.maxRounds&&tries<state.players.length){next=(next+1)%state.players.length;tries++}
  state.currentPlayerIdx=next;state.lastAction={text:'➡️ '+state.players[next].name+' ist jetzt dran'};
- render();startTimer();toast(state.lastAction.text)
+ render();startTimer();speakTurn(state.players[next].name);toast(state.lastAction.text)
 }
 function addPlayer(){
  if(state.teamsMode)return toast('Im Team-Modus können während des Spiels keine Spieler hinzugefügt werden.');
@@ -396,9 +472,10 @@ function openSetup(){
  document.getElementById('setup-overlay').classList.add('show')
 }
 function openSettings(){
- renderComboEditor();
+ renderComboEditor();renderPresetList();
  document.getElementById('settings-timer-enabled').checked=settings.timerEnabled;
  document.getElementById('settings-timer-seconds').value=String(settings.timerSeconds);
+ document.getElementById('settings-speech').checked=settings.speechEnabled;
  document.getElementById('settings-theme').checked=settings.theme==='light';
  document.getElementById('settings-overlay').classList.add('show')
 }
@@ -423,7 +500,7 @@ function startNewGame(){
   currentPlayerIdx:0,gameOver:false,maxRounds:rounds,lastAction:null,teamsMode,
   tournament:tournamentOn?{round:1,standings:{}}:null
  };
- undoStack=[];closeOverlay('setup-overlay');render();startTimer();toast('🚀 Spiel gestartet!')
+ undoStack=[];closeOverlay('setup-overlay');render();startTimer();speakTurn(state.players[0]?.name);toast('🚀 Spiel gestartet!')
 }
 function startNextRound(){
  const t=state.tournament;if(!t)return;
@@ -432,10 +509,22 @@ function startNextRound(){
   currentPlayerIdx:0,gameOver:false,maxRounds:state.maxRounds,lastAction:null,teamsMode:state.teamsMode,
   tournament:{round:t.round+1,standings:t.standings}
  };
- undoStack=[];closeOverlay('winner-overlay');render();startTimer();toast('▶️ Runde '+state.tournament.round+' gestartet!')
+ undoStack=[];closeOverlay('winner-overlay');render();startTimer();speakTurn(state.players[0]?.name);toast('▶️ Runde '+state.tournament.round+' gestartet!')
 }
 function endTournament(){
- closeOverlay('winner-overlay');openSetup();toast('🏁 Turnier beendet')
+ let msg='🏁 Turnier beendet';
+ if(state.tournament){
+  const rows=Object.entries(state.tournament.standings).sort((a,b)=>b[1].points-a[1].points);
+  if(rows.length){
+   const winnerName=rows[0][0];
+   if(!achievements[winnerName])achievements[winnerName]=[];
+   if(!achievements[winnerName].includes('tournament_win')){
+    achievements[winnerName].push('tournament_win');saveAchievements();
+    msg='🎖️ '+winnerName+' schaltet frei: 👑 Turniersieger';
+   }
+  }
+ }
+ closeOverlay('winner-overlay');openSetup();toast(msg)
 }
 
 function stopTimer(){clearInterval(timerInterval);timerInterval=null;const chip=document.getElementById('timer-chip');if(chip)chip.style.display='none'}
@@ -460,6 +549,59 @@ function renderTimer(){
 function toggleTimerSetting(cb){settings.timerEnabled=cb.checked;saveSettings();if(settings.timerEnabled)startTimer();else stopTimer()}
 function changeTimerSeconds(sel){settings.timerSeconds=+sel.value;saveSettings();if(settings.timerEnabled)startTimer()}
 function toggleTheme(){settings.theme=document.getElementById('settings-theme').checked?'light':'dark';saveSettings();applyTheme()}
+function speakTurn(name){
+ if(!settings.speechEnabled||!name)return;
+ if(!('speechSynthesis' in window))return;
+ try{
+  window.speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(name+' ist dran');
+  u.lang='de-DE';u.rate=1;
+  window.speechSynthesis.speak(u)
+ }catch(e){}
+}
+function toggleSpeechSetting(cb){settings.speechEnabled=cb.checked;saveSettings();if(cb.checked)speakTurn(state.players[state.currentPlayerIdx]?.name)}
+function loadPresets(){try{return JSON.parse(localStorage.getItem('sw_combo_presets'))||{}}catch{return{}}}
+function savePresetsToStorage(p){localStorage.setItem('sw_combo_presets',JSON.stringify(p))}
+function saveComboPreset(){
+ const nameEl=document.getElementById('preset-name'),name=nameEl.value.trim();
+ if(!name)return toast('Bitte einen Namen für das Preset eingeben.');
+ const presets=loadPresets();presets[name]=JSON.parse(JSON.stringify(COMBOS));savePresetsToStorage(presets);
+ nameEl.value='';renderPresetList();toast('💾 Preset „'+name+'“ gespeichert')
+}
+function renderPresetList(){
+ const el=document.getElementById('preset-list');if(!el)return;
+ const presets=loadPresets(),names=Object.keys(presets);
+ el.innerHTML=names.length?names.map(n=>`<div class="known-chip" onclick="applyPreset('${encodeURIComponent(n)}')">📋 ${esc(n)}<span class="chip-x" onclick="event.stopPropagation();deletePreset('${encodeURIComponent(n)}')">✕</span></div>`).join(''):'<span style="color:var(--muted);font-size:13px">Noch keine Presets gespeichert.</span>'
+}
+function applyPreset(enc){
+ const name=decodeURIComponent(enc),presets=loadPresets();if(!presets[name])return;
+ COMBOS=JSON.parse(JSON.stringify(presets[name]));saveCombos();renderCombos();renderComboEditor();toast('📋 Preset „'+name+'“ geladen')
+}
+function deletePreset(enc){
+ const name=decodeURIComponent(enc),presets=loadPresets();delete presets[name];savePresetsToStorage(presets);renderPresetList();toast('Preset entfernt')
+}
+function renderForecast(){
+ const el=document.getElementById('forecast-panel');if(!el)return;
+ if(!state.players.length){el.innerHTML='';return}
+ if(state.gameOver){el.innerHTML='<div style="color:var(--muted);font-size:13px">Spiel beendet.</div>';return}
+ const maxComboPts=Math.max(0,...COMBOS.filter(c=>c.pts!==null).map(c=>c.pts));
+ if(state.teamsMode){
+  const teams={};state.players.forEach(p=>{(teams[p.team]=teams[p.team]||[]).push(p)});
+  const teamData=Object.entries(teams).map(([team,members])=>{
+   const total=members.reduce((s,m)=>s+m.score,0);
+   const remaining=members.reduce((s,m)=>s+Math.max(0,state.maxRounds-m.rounds),0);
+   return {label:'Team '+((+team)+1)+' ('+members.map(m=>m.name).join(' & ')+')',total,max:total+remaining*maxComboPts}
+  });
+  const leader=Math.max(...teamData.map(t=>t.total));
+  el.innerHTML=teamData.map(t=>`<div class="rank-row"><span>${t.max>=leader?'✅':'❌'}</span><span>${esc(t.label)}</span><span class="rank-pts">${t.total} <span style="color:var(--muted);font-weight:400;font-size:11px">(max ${t.max})</span></span></div>`).join('')
+ } else {
+  const leader=Math.max(...state.players.map(p=>p.score));
+  el.innerHTML=state.players.map(p=>{
+   const remaining=Math.max(0,state.maxRounds-p.rounds),max=p.score+remaining*maxComboPts;
+   return `<div class="rank-row"><span>${max>=leader?'✅':'❌'}</span><span>${esc(p.name)}</span><span class="rank-pts">${p.score} <span style="color:var(--muted);font-weight:400;font-size:11px">(max ${max})</span></span></div>`
+  }).join('')
+ }
+}
 
 function buildLineChart(series,opts){
  opts=opts||{};const w=opts.width||600,h=opts.height||200,pad=32;
@@ -514,6 +656,7 @@ function finishMatch(){
  if(history.length>100)history=history.slice(0,100);saveHistory();
  state.players.forEach(p=>{const n=p.name.trim();if(n&&!/^Spieler \d+$/.test(n))known[n]=(known[n]||0)+1});saveKnown();
  state.players.forEach(p=>{(p.history||[]).forEach(h=>{if(!comboStats[p.name])comboStats[p.name]={};comboStats[p.name][h.comboName]=(comboStats[p.name][h.comboName]||0)+1})});saveComboStats();
+ checkAchievements();
  if(state.tournament){
   const t=state.tournament;
   if(state.teamsMode){
@@ -649,6 +792,8 @@ function openStats(){
    const formHtml=last5.map(mm=>`<span class="form-dot ${mm.rank===1?'win':'loss'}"></span>`).reverse().join('');
    const chrono=[...x.matches].reverse();
    let longest=0,cur=0;chrono.forEach(mm=>{if(mm.rank===1){cur++;longest=Math.max(longest,cur)}else cur=0});
+   const earnedIds=achievements[n]||[];
+   const earnedBadges=ACHIEVEMENTS.filter(a=>earnedIds.includes(a.id));
    return `<div class="match-card" id="pstat-${i}">
    <div class="match-header" onclick="togglePlayerStat(${i})">
     <div>🐷 <b>${esc(n)}</b><div style="color:var(--muted);font-size:12px;margin-top:3px">${x.games} Spiele · Ø ${(x.points/x.games).toFixed(1)} · Beste ${x.best} · Schlechteste ${x.worst}</div></div>
@@ -660,6 +805,7 @@ function openStats(){
      <div>🔥 Längste Siegesserie: <b style="color:var(--text)">${longest}</b></div>
      <div>📊 Form (letzte ${last5.length}): ${formHtml}</div>
     </div>
+    ${earnedBadges.length?`<div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">${earnedBadges.map(b=>`<span title="${esc(b.desc)}" style="background:#171d28;border:1px solid var(--border);border-radius:9px;padding:5px 9px;font-size:12px">${b.icon} ${esc(b.name)}</span>`).join('')}</div>`:''}
     ${x.matches.map(mm=>`<div class="rank-row"><span>${mm.rank===1?'🥇':mm.rank===2?'🥈':mm.rank===3?'🥉':mm.rank+'.'}</span><span>${esc(mm.date)}</span><span style="color:var(--muted)">${mm.rounds} Rd. · Platz ${mm.rank}/${mm.total}</span><span class="rank-pts">${mm.score}</span></div>`).join('')}
    </div>
   </div>`
@@ -716,7 +862,14 @@ function flash(el){el.classList.remove('flash');void el.offsetWidth;el.classList
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(()=>t.classList.remove('show'),2400)}
 function confetti(){for(let i=0;i<75;i++){const e=document.createElement('div');e.className='confetti';e.style.left=Math.random()*100+'vw';e.style.animationDelay=Math.random()*.7+'s';e.style.background=['#e85d2f','#f0a500','#4caf72','#5b9cf6','#ff6b9d','#a78bfa'][Math.floor(Math.random()*6)];document.body.appendChild(e);setTimeout(()=>e.remove(),3200)}}
 
-loadSettings();applyTheme();loadCombos();loadComboStats();load();renderCombos();render();renderSetupNames();startTimer();
+if('serviceWorker' in navigator){
+ try{
+  const swCode="self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>self.clients.claim());self.addEventListener('fetch',e=>{e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))});";
+  const swUrl=URL.createObjectURL(new Blob([swCode],{type:'application/javascript'}));
+  navigator.serviceWorker.register(swUrl).catch(()=>{});
+ }catch(e){}
+}
+loadSettings();applyTheme();loadCombos();loadComboStats();loadAchievements();load();renderCombos();render();renderSetupNames();startTimer();
 </script>
 </body>
 </html>
